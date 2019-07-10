@@ -3,11 +3,11 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          Free ecommerce template for Vue.js projects
+          ARTS LOVE WORLD
         </h1>
         <h2 class="subtitle">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-        </h2>
+        Instant Digitally Download Amazing Art Works ::: ::: Awesome Classic Premium Arts 
+          </h2>
       </div>
     </div>
   </div>
