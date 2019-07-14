@@ -1,56 +1,42 @@
 <template>
-  <div :class="[ openModal ? 'is-active' : '', 'modal' ]">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">{{ modalTitle }}</p>
-        <button class="delete" aria-label="close" @click="closeModal(false)"></button>
-      </header>
-      <section class="modal-card-body">
-        <div v-if="!isCheckoutSection">
-          <div class="box" v-for="product in products" :key="product.id">
-            <button
-              class="is-pulled-right button is-info is-inverted"
-              @click="removeFromCart(product.id)"
-            >{{ removeLabel }}</button>
-
-            <p>{{ product.title }} {{ product.quantity > 0 ? ` - Quantity: ${product.quantity}` : ''}}</p>
-            <p>&euro;{{ product.price }}</p>
-          </div>
-          <div v-if="products.length === 0">
-            <p>{{ cartEmptyLabel }}</p>
-            <br />
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            
-          </div>
-        </div>
-        <div v-if="isCheckoutSection">
-          <p>You bought it :-)</p>
+	<div :class="[ openModal ? 'is-active' : '', 'modal' ]">
+		<div class="modal-background"></div>
+		<div class="modal-card">
+			<header class="modal-card-head">
+				<p class="modal-card-title">{{ modalTitle }}</p>
+				<button class="delete" aria-label="close" @click="closeModal(false)"></button>
+			</header>
+			<section class="modal-card-body">
+				<div v-if="!isCheckoutSection">
+					<div class="box" v-for="product in products" :key="product.id">
+						<button class="is-pulled-right button is-info is-inverted" @click="removeFromCart(product.id)">{{ removeLabel }}</button>
+						<p>{{ product.title }}  {{ product.quantity > 0 ?  ` - Quantity: ${product.quantity}` : ''}}</p>
+						<p>{{ product.price }} &euro;</p>
+					</div>
+					<div v-if="products.length === 0">
+						<p>{{ cartEmptyLabel }}</p>
+					</div>
 				</div>
-      </section>
-      <footer class="modal-card-foot">
-        <button
-          v-show="products.length > 0 && !isCheckoutSection"
-          class="button is-success"
-          @click="onNextBtn"
-        >{{ buyLabel }}</button>
-        <button
-          v-if="isCheckoutSection"
-          class="button is-success"
-          @click="closeModal(true)"
-        >{{ closeLabel }}</button>
-      </footer>
-    </div>
-  </div>
+				<div v-if="isCheckoutSection">
+					<p>You bought it :-)</p>
+				</div>
+			</section>
+			<footer class="modal-card-foot">
+				<button v-show="products.length > 0 && !isCheckoutSection" class="button is-success" @click="onNextBtn">{{ buyLabel }}</button>
+				<button v-if="isCheckoutSection" class="button is-success" @click="closeModal(true)">{{ closeLabel }}</button>
+			</footer>
+		</div>
+	</div>
 </template>
 
 <script>
-
+import paystack from 'vue-paystack';
 export default {
   name: 'checkout',
+   components: {
+        paystack
+    },
+    
 	data () {
 		return {
 			modalTitle: 'Checkout',
@@ -58,7 +44,10 @@ export default {
 			cartEmptyLabel: 'Your cart is empty',
 			closeLabel: 'Close',
       isCheckoutSection: false,
-              
+      paystackkey: "pk_test_2786e320f973935474316f88d193e9e84ae766ea", //paystack public key
+          email: " ", // Customer email
+          amount: " "  // in kobo
+        
 		}
 	},
 	computed: {
@@ -102,13 +91,20 @@ export default {
 				} else {
 					productLabel = 'product';
 				}
-				return `Buy ${totalProducts} ${productLabel} at €${finalPrice}`;
+				return `Buy ${totalProducts} ${productLabel} at ${finalPrice}€`;
 		},
 		isUserLoggedIn () {
 			return this.$store.getters.isUserLoggedIn;
 		}
 	},
 	methods: {
+    callback: function(response){
+            console.log(response)
+          },
+    close: function(){
+            console.log("Payment closed")
+          },
+
 		closeModal (reloadPage) {
 			this.$store.commit('showCheckoutModal', false);
 			if (reloadPage) {

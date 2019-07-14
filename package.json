@@ -1,9 +1,8 @@
 {
   "name": "vuemmerce",
   "version": "0.1.0",
-  "description": "Awesome downloadable premium arts",
+  "description": "Arts Love World Classic Arts",
   "author": "Allen Ehis <artsloveworld@gmail.com>",
-  
   "scripts": {
     "build": "babel src -d lib",
     "test": "jest",
