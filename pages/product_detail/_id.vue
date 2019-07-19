@@ -6,38 +6,42 @@
       </figure>
       <div class="card-content column is-two-thirds">
         <div class="card-content__title">
-          <h2 class="title is-4">{{ product.title }}</h2>
-          <button
-            class="button is-small"
-            :title="removeFromFavouriteLabel"
-            v-show="product.isFavourite"
-            @click="removeFromFavourite(product.id)"
-          >
-            <span class="icon is-small">
-              <i class="fa fa-heart"></i>
-            </span>
-          </button>
-          <button
-            class="button is-small"
-            :title="addToFavouriteLabel"
-            v-show="!product.isFavourite"
-            @click="saveToFavorite(product.id)"
-          >
-            <span class="icon is-small">
-              <i class="fa fa-heart-o"></i>
-            </span>
-          </button>
+          <h2 class="title is-4">
+            {{ product.title }}
+            <button
+              class="button is-small"
+              :title="removeFromFavouriteLabel"
+              v-show="product.isFavourite"
+              @click="removeFromFavourite(product.id)"
+            >
+              <span class="icon is-small">
+                <i class="fa fa-heart"></i>
+              </span>
+            </button>
+            <button
+              class="button is-small"
+              :title="addToFavouriteLabel"
+              v-show="!product.isFavourite"
+              @click="saveToFavorite(product.id)"
+            >
+              <span class="icon is-small">
+                <i class="fa fa-heart-o"></i>
+              </span>
+            </button>
+          </h2>
         </div>
         <div v-if="product.id == 1"></div>
         <div v-else class="card-content__text">
           <h2 class="subtitle">Highly Appreciative Valuable Art</h2>
-          <span class="is-4">Available Size:</span>
-          <input placeholder='    27.6" X 19.7"    ' />
-          <span class="is-4">Shipping:</span>
-          <input placeholder=" Free " />
 
-          <br />
-          <br />
+          <div>
+            Available Size:
+            <input form-control col-md-4 placeholder=" 27.6' X 19.7' " />
+          </div>
+          <div>
+            <br />Shipping:
+            <input form-control col-md-4 placeholder=" Free " />
+          </div>
         </div>
         <div class="card-content__ratings" v-if="product.rating === 1">
           <i class="fa fa-star"></i>
@@ -82,7 +86,7 @@
         </div>
         <div class="card-content__price is-pulled-left">
           <span class="title is-3">
-            <strong>&euro;{{ product.price }}</strong>
+            <strong>{{ product.price }}&euro;</strong>
           </span>
         </div>
         <div class="card-content__btn is-pulled-right">
@@ -97,14 +101,9 @@
             @click="removeFromCart(product.id)"
           >{{ removeFromCartLabel }}</button>
         </div>
-        <br/>
-        <div>
-        <nuxt-link :to="{ name: 'index' }" class="navbar-item">
-          <h3>Continue Shopping...</h3>
-        </nuxt-link>
+        <p></p>
+        <p></p>
       </div>
-      </div>
-      
     </div>
   </div>
 </template>
@@ -112,7 +111,6 @@
 <script>
 export default {
   name: "product_detail-id",
-
   validate({ params }) {
     return /^\d+$/.test(params.id);
   },
@@ -128,22 +126,18 @@ export default {
       quantityArray: []
     };
   },
-
   mounted() {
     this.product = this.$store.getters.getProductById(this.$route.params.id);
     this.selected = this.product.quantity;
-
     for (let i = 1; i <= 20; i++) {
       this.quantityArray.push(i);
     }
   },
-
   computed: {
     isAddedBtn() {
       return this.product.isAddedBtn;
     }
   },
-
   methods: {
     addToCart(id) {
       let data = {
@@ -167,18 +161,6 @@ export default {
         quantity: this.selected
       };
       this.$store.commit("quantity", data);
-    },
-    saveToFavorite(id) {
-      let isUserLogged = this.$store.state.userInfo.isLoggedIn;
-
-      if (isUserLogged) {
-        this.$store.commit("addToFavourite", id);
-      } else {
-        this.$store.commit("showLoginModal", true);
-      }
-    },
-    removeFromFavourite(id) {
-      this.$store.commit("removeFromFavourite", id);
     }
   }
 };
@@ -187,7 +169,6 @@ export default {
 <style lang="scss" scoped>
 .card-content {
   padding: 15px 10px 15px 0;
-
   &__text {
     margin: 15px 0;
   }
@@ -198,4 +179,3 @@ export default {
   }
 }
 </style>
-

@@ -19,11 +19,51 @@
         </a>
       </div>
 
-      <div class="navbar-menu is-active">
+      <div class="navbar-menu">
         <div class="navbar-start">
           <div class="navbar-item field">
             <VmSearch></VmSearch>
           </div>
+        </div>
+
+        <div class="navbar-menu">
+          <nuxt-link :to="{ name: 'index' }" class="navbar-item">
+            <h1>
+              <span class="icon">
+                <i class="fa fa-home"></i>
+              </span> Home
+            </h1>
+          </nuxt-link>
+        </div>
+
+        <div class="navbar-menu">
+          <nuxt-link :to="{ name: 'policy' }" class="navbar-item">
+            <h1>
+              <span class="icon">
+                <i class="fa fa-credit-card"></i>
+              </span> Sales Policy
+            </h1>
+          </nuxt-link>
+        </div>
+
+        <div class="navbar-menu">
+          <nuxt-link :to="{ name: 'mailorder' }" class="navbar-item">
+            <h1>
+              <span class="icon">
+                <i class="fa fa-envelope"></i>
+              </span> Mail Order
+            </h1>
+          </nuxt-link>
+        </div>
+
+        <div class="navbar-menu">
+          <nuxt-link :to="{ name: 'contact' }" class="navbar-item">
+            <h1>
+              <span class="icon">
+                <i class="fa fa-inbox"></i>
+              </span> Contact Us
+            </h1>
+          </nuxt-link>
         </div>
 
         <div class="navbar-end">

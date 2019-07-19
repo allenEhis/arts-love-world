@@ -19,23 +19,23 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@nuxtjs/font-awesome": "^1.0.3",
-    "babel-polyfill": "^6.26.0",
-    "babel-runtime": "^6.26.0",
-    "bulma": "^0.7.4",
+    "@nuxtjs/font-awesome": "latest",
+    "babel-polyfill": "latest",
+    "babel-runtime": "latest",
+    "bulma": "latest",
     "nuxt": "latest",
-    "vue": "^2.6.10",
-    "vue-router": "^3.0.2",
-    "vuex": "^3.1.0"
+    "vue": "latest",
+    "vue-router": "latest",
+    "vuex": "latest"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.4.3",
-    "@vue/cli-plugin-babel": "^3.5.5",
-    "@vue/cli-service": "^3.5.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "node-sass": "^4.11.0",
-    "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.6.10"
+    "@babel/preset-env": "latest",
+    "@vue/cli-plugin-babel": "latest",
+    "@vue/cli-service": "latest",
+    "babel-plugin-transform-runtime": "latest",
+    "node-sass": "latest",
+    "sass-loader": "latest",
+    "vue-template-compiler": "latest"
   },
   "eslintConfig": {
     "root": true,
